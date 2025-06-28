@@ -1,0 +1,50 @@
+{% extends 'systemsetup/base.html' %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-2 mb-20">
+    <h1 class="text-3xl font-bold text-center mb-10">Engineering Projects</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+        <!-- Software Projects -->
+        <a href="/productlist/?productcat=softwareprojects" class="block bg-white rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1">
+            <div class="p-6">
+                <div class="flex items-center justify-center h-24 w-24 mx-auto mb-4 bg-blue-100 rounded-full">
+                    <i class="fas fa-code text-4xl text-blue-500"></i>
+                </div>
+                <h2 class="text-xl font-semibold text-center">Software Projects</h2>
+            </div>
+        </a>
+
+        <!-- Hardware Projects -->
+        <a href="/productlist/?productcat=hardwareprojects" class="block bg-white rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1">
+            <div class="p-6">
+                <div class="flex items-center justify-center h-24 w-24 mx-auto mb-4 bg-green-100 rounded-full">
+                    <i class="fas fa-microchip text-4xl text-green-500"></i>
+                </div>
+                <h2 class="text-xl font-semibold text-center">Hardware Projects</h2>
+            </div>
+        </a>
+
+        <!-- Mechanical Projects -->
+        <a href="/productlist/?productcat=mechanicalprojects" class="block bg-white rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1">
+            <div class="p-6">
+                <div class="flex items-center justify-center h-24 w-24 mx-auto mb-4 bg-red-100 rounded-full">
+                    <i class="fas fa-cogs text-4xl text-red-500"></i>
+                </div>
+                <h2 class="text-xl font-semibold text-center">Mechanical Projects</h2>
+            </div>
+        </a>
+
+        <!-- Simulation Projects -->
+        <a href="/productlist/?productcat=simulationprojects" class="block bg-white rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-1">
+            <div class="p-6">
+                <div class="flex items-center justify-center h-24 w-24 mx-auto mb-4 bg-yellow-100 rounded-full">
+                    <i class="fas fa-project-diagram text-4xl text-yellow-500"></i>
+                </div>
+                <h2 class="text-xl font-semibold text-center">Simulation Projects</h2>
+            </div>
+        </a>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'systemsetup/base.html' %}
+
+{% block title %}Kids Projects | HandMadeProject{% endblock %}
+
+{% block content %}
+<div class="container mx-auto p-4 sm:p-6 lg:p-8">
+    <div class="text-center mb-12">
+        <h1 class="text-4xl font-extrabold text-gray-900">Kids Projects (Beta)</h1>
+        <p class="mt-4 text-lg text-gray-600">Fun and educational projects for young creators.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Science Projects Card -->
+        <a href="{% url 'productlist' %}?productcat=kidsscience" class="block bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-300">
+            <div class="p-6 text-center">
+                <i class="fas fa-flask text-5xl text-indigo-600 mb-4"></i>
+                <h3 class="text-2xl font-bold text-gray-800">Science Projects</h3>
+                <p class="text-gray-600 mt-2">Explore the wonders of science with these exciting experiments.</p>
+            </div>
+        </a>
+
+        <!-- Origami/Craft Projects Card -->
+        <a href="{% url 'productlist' %}?productcat=kidscraft" class="block bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-300">
+            <div class="p-6 text-center">
+                <i class="fas fa-palette text-5xl text-indigo-600 mb-4"></i>
+                <h3 class="text-2xl font-bold text-gray-800">Origami/Craft Projects</h3>
+                <p class="text-gray-600 mt-2">Unleash your creativity with fun and colorful craft projects.</p>
+            </div>
+        </a>
+    </div>
+</div>
+{% endblock %}
