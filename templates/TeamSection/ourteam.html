@@ -1,0 +1,60 @@
+{% extends 'systemsetup/base.html' %}
+
+{% block title %}Our Team | HandMadeProject{% endblock %}
+
+{% block content %}
+<div class="container mx-auto p-2 sm:p-4 mb-20">
+    <div class="text-center mb-6">
+        <h1 class="text-4xl font-extrabold text-gray-900">Meet Our Team</h1>
+        <p class="mt-4 text-lg text-gray-600">The passionate individuals behind HandMadeProject.</p>
+    </div>
+    {% if user.username == 'atharva' %}
+    <a href="/add-developer" class="inline-block px-6 py-2 text-base font-semibold leading-6 text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 mb-4">
+        <i class="fas fa-plus text-center"></i> <i class="fas fa-child text-center mr-3"></i>Add Member
+    </a>
+    {% endif %}
+
+
+
+
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
+        {% for member in team_members %}
+        <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-300">
+            <div class="h-56 bg-gray-200">
+                <img src="data:image/png;base64,{{ member.photo_base64 }}" alt="{{ member.name }}" class="w-full h-full object-cover">
+            </div>
+            <div class="px-6 py-2 text-center">
+                <h3 class="text-2xl font-bold text-gray-800">{{ member.name }}</h3>
+                <p class="text-indigo-600 font-semibold">{{ member.role }}</p>
+                <p class="text-gray-600 mt-2">Experience: {{ member.experience }}</p>
+                <a href="/ourteam/profile/?name={{ member.name }}" class="inline-block px-4 py-1 mt-4 text-sm font-medium leading-6 text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700">View Profile</a>
+                <!-- <div class="mt-4 flex justify-center space-x-4">
+                    {% if member.linkedin_url %}
+                    <a href="{{ member.linkedin_url }}" target="_blank" class="text-gray-500 hover:text-indigo-600">
+                        <i class="fab fa-linkedin fa-2x"></i>
+                    </a>
+                    {% endif %}
+                    {% if member.github_url %}
+                    <a href="{{ member.github_url }}" target="_blank" class="text-gray-500 hover:text-indigo-600">
+                        <i class="fab fa-github fa-2x"></i>
+                    </a>
+                    {% endif %}
+                </div> -->
+                {% if user.username == 'atharva' %}
+                <div class="p-4 text-center border-t border-gray-200 mt-4">
+                    <a href="/edit-developer/{{ member.devid }}" class="text-sm font-medium text-indigo-600 hover:text-indigo-500">Edit Member</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-span-full text-center py-12 px-6 bg-gray-50 rounded-lg">
+            <i class="fas fa-users-slash text-4xl text-gray-400 mb-4"></i>
+            <h3 class="text-xl font-semibold text-gray-700">No Team Members Found</h3>
+            <p class="text-gray-500 mt-2">The team is currently in stealth mode. Check back soon!</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,112 @@
+{% extends "systemsetup/base.html" %}
+{% block title %}{{ product.productname }} | DigitalAssets{% endblock %}
+
+{% block content %}
+<!-- <h1 class="text-4xl font-bold">Product Info</h1> -->
+<section class="max-w-5xl mx-auto py-8 mb-20 space-y-8 bg-white rounded-md">
+
+  {% if error %}
+  <div class="bg-red-100 text-red-600 p-4 rounded-md border border-red-300">
+    {{ error }}
+  </div>
+  {% else %}
+  <!-- Product Header -->
+  <div class="flex flex-col md:flex-row gap-8">
+    <!-- Product Image -->
+    <div class="flex-shrink-0 w-full md:w-1/2">
+      <img src="data:image/png;base64,{{ product.mainimgbasetxt }}" alt="{{ product.productname }}"
+        class="w-full h-auto rounded-lg border border-gray-200 shadow-sm">
+    </div>
+
+    <!-- Product Details -->
+    <div class="flex-1 space-y-5">
+      <div>
+        <h1 class="text-3xl md:text-4xl font-semibold text-gray-900">
+          {{ product.productname | title }}
+        </h1>
+        {% if user.is_authenticated %}
+          <div class="flex items-center mt-4">
+            <form action="{% url 'add_to_favorites' product.prodid %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="flex items-center px-4 py-2 rounded-lg text-white font-semibold transition-colors duration-300 {% if is_favorite %}bg-red-400 hover:bg-red-600{% else %}bg-indigo-400 hover:bg-indigo-700{% endif %}">
+                {% if is_favorite %}
+                  <i class="fas fa-heart mr-2"></i>Remove from Favorites
+                {% else %}
+                  <i class="fas fa-heart mr-2"></i>Add to Favorites
+                {% endif %}
+              </button>
+            </form>
+            {% if user.username == 'atharva' %}
+            <a href="{% url 'edit_product' product.prodid %}" class="flex items-center px-4 py-2 rounded-lg text-white font-semibold bg-gray-600 hover:bg-gray-700 transition-colors duration-300 ml-2">
+              <i class="fas fa-edit mr-2"></i>Edit
+            </a>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+      <!-- <p class="text-sm text-gray-500">Added on: {{ product.timestamp }}</p> -->
+
+      {% if product.highlighttitle %}
+      <div class="bg-yellow-50 border border-yellow-200 p-3 rounded-md">
+        <p class="font-medium text-yellow-800">{{ product.highlighttitle | title }}</p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Info Section -->
+  {% if product.prodinfo %}
+  <div>
+    <!-- <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2">About Project</h2> -->
+    <p class="mt-2 text-gray-700">{{ product.prodinfo | safe }}</p>
+  </div>
+  {% endif %}
+
+  <!-- Benefits Section -->
+  {% if product.benefits %}
+  <div>
+    <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2">Benefits</h2>
+    <p class="mt-2 text-gray-700">{{ product.benefits }}</p>
+  </div>
+  {% endif %}
+
+  <!-- Usage Section -->
+  {% if product.usage %}
+  <div>
+    <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2">Usage</h2>
+    <p class="mt-2 text-gray-700">{{ product.usage }}</p>
+  </div>
+  {% endif %}
+
+  <!-- Content Section -->
+  {% if product.content %}
+  <div>
+    <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2">Details</h2>
+    <div class="mt-2 text-gray-700 space-y-2">
+      {{ product.content|safe }}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Product Images Gallery -->
+  {% if productImages %}
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+    {% for img in productImages %}
+    <div class="border p-2 rounded-md shadow-sm bg-gray-50">
+      <img src="data:image/png;base64,{{ img.mainimgbasetxt }}" alt="{{ img.productname }}"
+        class="w-full h-auto rounded-md">
+      {% if img.highlighttitle %}
+      <p class="text-sm mt-1 text-center text-gray-700 font-medium">{{ img.highlighttitle }}</p>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+
+  {% endif %}
+
+
+
+</section>
+{% endblock %}

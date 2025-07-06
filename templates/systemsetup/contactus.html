@@ -1,0 +1,48 @@
+{% extends "systemsetup/base.html" %}
+
+{% block title %}Contact Us | DigitalAssets{% endblock %}
+
+{% block content %}
+<section class="px-4 max-w-2xl mx-auto">
+  <div class="text-center mb-10">
+    <h1 class="text-4xl font-bold text-gray-800">Get in Touch</h1>
+    <p class="text-gray-500 mt-2">We'd love to hear from you. Fill out the form below.</p>
+  </div>
+
+  {% if messages %}
+    <div class="mb-4">
+      {% for message in messages %}
+        <div class="p-4 rounded bg-green-100 text-green-800">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <form action="{% url 'contactus' %}" method="POST" class="space-y-6 bg-white shadow-md rounded-lg p-6">
+    {% csrf_token %}
+    <div>
+      <label class="block text-gray-700 font-medium mb-1" for="name">Your Name</label>
+      <input type="text" id="name" name="name" required placeholder="Enter your name"
+             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:border-blue-400 outline-none">
+    </div>
+
+    <div>
+      <label class="block text-gray-700 font-medium mb-1" for="email">Your Email</label>
+      <input type="email" id="email" name="email" required placeholder="Enter your email"
+             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:border-blue-400 outline-none">
+    </div>
+
+    <div>
+      <label class="block text-gray-700 font-medium mb-1" for="message">Message</label>
+      <textarea id="message" name="message" rows="5" required placeholder="Write your message"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring focus:border-blue-400 outline-none"></textarea>
+    </div>
+
+    <div class="text-right">
+      <button type="submit"
+              class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">Send Message</button>
+    </div>
+  </form>
+</section>
+{% endblock %}
